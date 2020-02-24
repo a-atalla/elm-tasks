@@ -2,7 +2,15 @@ module Main exposing (..)
 
 import Browser
 import Html exposing (Html, button, div, h1, i, input, li, text, ul)
-import Html.Attributes exposing (class, classList, placeholder, style, target, value)
+import Html.Attributes
+    exposing
+        ( class
+        , classList
+        , placeholder
+        , style
+        , target
+        , value
+        )
 import Html.Events exposing (onClick, onInput)
 
 
@@ -18,7 +26,7 @@ type alias Task =
 
 
 type alias Model =
-    { task : Task
+    { newTask : Task
     , tasks : List Task
     }
 
@@ -30,7 +38,7 @@ initTask =
 
 init : Model
 init =
-    { task = initTask, tasks = [] }
+    { newTask = initTask, tasks = [] }
 
 
 
@@ -48,17 +56,17 @@ update : Msg -> Model -> Model
 update msg model =
     case msg of
         TEXT_CHANGE text ->
-            { model | task = { id = model.task.id, description = text, isComplete = False } }
+            { model | newTask = { id = model.newTask.id, description = text, isComplete = False } }
 
         ADD_TASK ->
             let
                 oldTask =
-                    model.task
+                    model.newTask
 
                 newTask =
                     { oldTask | id = oldTask.id + 1 }
             in
-            if model.task.description == "" then
+            if model.newTask.description == "" then
                 model
 
             else
@@ -66,7 +74,7 @@ update msg model =
                     | tasks =
                         newTask
                             :: model.tasks
-                    , task = { newTask | description = "" }
+                    , newTask = { newTask | description = "" }
                 }
 
         TOGGLE_TASK taskId ->
@@ -95,12 +103,27 @@ view model =
             List.reverse model.tasks
     in
     div [ class "container" ]
-        [ h1 [ class "title" ] [ text "Tasks List" ]
-        , div [ class "form" ]
-            [ input [ class "input", placeholder "New Task", value model.task.description, onInput TEXT_CHANGE ] []
-            , button [ class "btn-add", onClick ADD_TASK ] [ i [ class "fas fa-plus-circle fa-2x" ] [] ]
+        [ h1
+            [ class "title"
             ]
-        , div [ class "" ] [ ul [] (List.map toLi tasks) ]
+            [ text "Tasks List" ]
+        , div
+            [ class "form"
+            ]
+            [ input
+                [ class "input"
+                , placeholder "New Task"
+                , value model.newTask.description
+                , onInput TEXT_CHANGE
+                ]
+                []
+            , button
+                [ class "btn-add"
+                , onClick ADD_TASK
+                ]
+                [ i [ class "fas fa-plus-circle fa-2x" ] [] ]
+            ]
+        , div [] [ ul [] (List.map toLi tasks) ]
         ]
 
 
@@ -108,11 +131,23 @@ toLi : Task -> Html Msg
 toLi task =
     div
         [ class "row item-wrapper" ]
-        [ li [ classList [ ( "is-complete", task.isComplete ) ], onClick (TOGGLE_TASK task.id) ] [ text task.description ]
-        , button [ class "delete-btn", onClick (DELETE_TASK task.id) ] [ i [ class "far fa-trash-alt fa-2x" ] [] ]
+        [ li
+            [ classList [ ( "is-complete", task.isComplete ) ]
+            , onClick (TOGGLE_TASK task.id)
+            ]
+            [ text task.description ]
+        , button
+            [ class "delete-btn"
+            , onClick (DELETE_TASK task.id)
+            ]
+            [ i [ class "far fa-trash-alt fa-2x" ] [] ]
         ]
 
 
 main : Program () Model Msg
 main =
-    Browser.sandbox { init = init, update = update, view = view }
+    Browser.sandbox
+        { init = init
+        , update = update
+        , view = view
+        }
