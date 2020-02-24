@@ -1,0 +1,122 @@
+.box {
+    border: 1px solid;
+}
+
+.box.green {
+    border-color: green;
+}
+
+.box.blue {
+    border-color: blue;
+}
+.box.red {
+    border-color: red;
+}
+
+/*******************************************************/
+body {
+    background-color: #f5f5f5;
+    font-family: 'Montserrat', sans-serif ;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin: 0 auto;
+    border: 1px solid #ddd;
+    margin-top: 100px;
+    border-radius: 8px;
+    background-color: #ffffff;
+}
+.title{
+    align-self: center;
+    color: #555;
+    text-transform: uppercase;
+    font-weight: bolder;
+    font-size: 24px;
+}
+
+.form {
+    display: flex;
+      padding: 0 16px;
+}
+
+.input {
+    flex:1;
+     border-radius: 4px;
+     border: 1px solid #ddd;
+    outline: none;
+    padding: 8px;
+    font-size: 22px;
+}
+.input::placeholder {
+    font-family: 'Montserrat', sans-serif ;
+    font-size: 18px;
+}
+
+.btn-add {
+    height: 42px;
+    margin-left: 8px;
+    background-color: #555;
+    color: #ffffff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 0 24px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.btn-add:active {
+    transform: translateY(1px);
+}
+
+@media (max-width: 1024px) {
+    .container {
+        width: 95%;
+    }
+}
+@media (max-width: 700px) {
+
+    .form {
+        flex-direction: column;
+    }
+    .input {
+        line-height: 32px;
+    }
+    .btn-add {
+         margin-left: 0;
+        margin-top: 16px;
+    }
+}
+
+ul {
+    padding: 0;
+    /* border: 1px solid #ddd; */
+}
+
+.item-wrapper {
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+}
+
+li {
+    list-style: none;
+    flex: 1;
+    cursor: pointer;
+    font-size: 22px;
+}
+li.is-complete {
+    text-decoration: line-through;
+}
+.delete-btn {
+    background-color: darkred;
+    color: #fff;
+    border-radius: 4px;
+    padding: 4px 8px;
+    margin: 0 8px;
+    cursor: pointer;
+}
