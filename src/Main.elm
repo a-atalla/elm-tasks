@@ -46,19 +46,19 @@ init =
 
 
 type Msg
-    = TEXT_CHANGE String
-    | ADD_TASK
-    | TOGGLE_TASK Int
-    | DELETE_TASK Int
+    = TextChange String
+    | AddTask
+    | ToggleTask Int
+    | DeleteTask Int
 
 
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        TEXT_CHANGE text ->
+        TextChange text ->
             { model | newTask = { id = model.newTask.id, description = text, isComplete = False } }
 
-        ADD_TASK ->
+        AddTask ->
             let
                 oldTask =
                     model.newTask
@@ -77,7 +77,7 @@ update msg model =
                     , newTask = { newTask | description = "" }
                 }
 
-        TOGGLE_TASK taskId ->
+        ToggleTask taskId ->
             let
                 toggle task =
                     if taskId == task.id then
@@ -88,7 +88,7 @@ update msg model =
             in
             { model | tasks = List.map toggle model.tasks }
 
-        DELETE_TASK taskId ->
+        DeleteTask taskId ->
             { model | tasks = List.filter (\task -> not (taskId == task.id)) model.tasks }
 
 
@@ -114,12 +114,12 @@ view model =
                 [ class "input"
                 , placeholder "New Task"
                 , value model.newTask.description
-                , onInput TEXT_CHANGE
+                , onInput TextChange
                 ]
                 []
             , button
                 [ class "btn-add"
-                , onClick ADD_TASK
+                , onClick AddTask
                 ]
                 [ i [ class "fas fa-plus-circle fa-2x" ] [] ]
             ]
@@ -133,12 +133,12 @@ toLi task =
         [ class "row item-wrapper" ]
         [ li
             [ classList [ ( "is-complete", task.isComplete ) ]
-            , onClick (TOGGLE_TASK task.id)
+            , onClick (ToggleTask task.id)
             ]
             [ text task.description ]
         , button
             [ class "delete-btn"
-            , onClick (DELETE_TASK task.id)
+            , onClick (DeleteTask task.id)
             ]
             [ i [ class "far fa-trash-alt fa-2x" ] [] ]
         ]
