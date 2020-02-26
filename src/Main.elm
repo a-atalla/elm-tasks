@@ -1,7 +1,7 @@
 module Main exposing (..)
 
 import Browser
-import Html exposing (Html, button, div, h1, i, input, li, text, ul)
+import Html exposing (Html, button, div, form, h1, i, input, li, text, ul)
 import Html.Attributes
     exposing
         ( class
@@ -11,7 +11,7 @@ import Html.Attributes
         , target
         , value
         )
-import Html.Events exposing (onClick, onInput)
+import Html.Events exposing (onClick, onInput, onSubmit)
 
 
 
@@ -107,8 +107,9 @@ view model =
             [ class "title"
             ]
             [ text "Tasks List" ]
-        , div
+        , form
             [ class "form"
+            , onSubmit AddTask
             ]
             [ input
                 [ class "input"

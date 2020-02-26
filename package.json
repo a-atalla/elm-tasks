@@ -1,0 +1,17 @@
+{
+  "name": "elm-tasks",
+  "version": "1.0.0",
+  "repository": "git@github.com:a-atalla/elm-tasks.git",
+  "scripts": {
+    "dev": "parcel src/index.html"
+  },
+  "author": "a.atalla <a.3talla@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "parcel-bundler": "^1.12.4"
+  },
+  "devDependencies": {
+    "elm-hot": "^1.1.4",
+    "node-elm-compiler": "^5.0.4"
+  }
+}
