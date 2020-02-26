@@ -1,6 +1,6 @@
 # Elm TASKS
 
-- This is my first very basic app with [elm](https://elm-lang.org/) using [create-elm-app](https://github.com/halfzebra/create-elm-app)
+- This is my first very basic app with [elm](https://elm-lang.org/).
 - I decided to use normal css so i can focus only on Elm
 
 ## Screenshot
